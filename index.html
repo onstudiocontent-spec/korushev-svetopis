@@ -117,7 +117,7 @@
     opacity:0;transform:translateY(26px) scale(.97);filter:blur(6px);transition:opacity .7s,transform .7s,filter .7s;
     will-change:transform,opacity}
   .card.in{opacity:1;transform:none;filter:none}
-  .card .cover{position:relative;aspect-ratio:16/9;overflow:hidden}
+  .card .cover{position:relative;aspect-ratio:4/5;overflow:hidden}
   .card .cover .art{position:absolute;inset:0;transition:transform .9s cubic-bezier(.16,1,.3,1)}
   .card:hover .cover .art{transform:scale(1.05)}
   .card .cover::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(5,5,6,.85))}
@@ -367,16 +367,17 @@ const WASH = {
   'Гос':'radial-gradient(95% 75% at 34% 20%,rgba(150,175,150,.4),transparent 55%),radial-gradient(50% 50% at 82% 90%,rgba(201,162,75,.14),transparent 60%),linear-gradient(155deg,#19221e,#0f1513 60%,#0b0b0d)',
   'Индустрия':'radial-gradient(95% 75% at 62% 20%,rgba(90,135,175,.5),transparent 55%),radial-gradient(50% 50% at 18% 92%,rgba(201,162,75,.16),transparent 60%),linear-gradient(155deg,#141e29,#0e151c 60%,#0b0b0d)'
 };
+const B='https://i.wfolio.ru/x/XEFEvE-Nu381pOR4oV5MYYkCKAb7WEFi/2HxtdBnmmBUxFRl-bxvEKe5TBld7KBhR/mZVnX2Wn7EJ4VVc-U1E0';
 const SHOOTS = [
-  {cat:'Свадьбы',title:'Bosco Ceremony',meta:'СВАДЬБА · BOSCO',path:'/bosco-ceremony',cover:'https://i.wfolio.ru/x/2liGxMhJRjilwq8i78-UqZczLd56D3TA/sTnJtdZp03LsDDiOBzLXI-I2h26Bzrzc/TMWRSPwdrKgzW3k4WFS2D1-1vsAWB0HT/CtbYbMZd1NGatrZ-IP11KHXpSX4TMoy_/Tf12k3Ta9f8knj9ehkk-xw.jpg'},
-  {cat:'Свадьбы',title:'Даниил & Евгения',meta:'СВАДЬБА · МОСКВА',path:'/daniil-evgeniya',cover:'https://i.wfolio.ru/x/2liGxMhJRjilwq8i78-UqZczLd56D3TA/sTnJtdZp03LsDDiOBzLXI-I2h26Bzrzc/TMWRSPwdrKgzW3k4WFS2D0LAtMitbKxO/e-8s7jZK-nhCFCH7hB1qiPX61NbIb3Cr/viG9PewPsJ8xW6tiXHwM5w.jpg'},
-  {cat:'Свадьбы',title:'Dmitry & Daria',meta:'СВАДЬБА',path:'/dmitry-and-daria-s',cover:'https://i.wfolio.ru/x/2liGxMhJRjilwq8i78-UqZczLd56D3TA/sTnJtdZp03LsDDiOBzLXI-I2h26Bzrzc/TMWRSPwdrKgzW3k4WFS2D5-ObkoBRE6f/K1uCtnX2M5Fi4SGU23WPDFLa_zhiI33C/qf3hQp_nqID0Di4FfxA1Xw.jpg'},
-  {cat:'Ивенты',title:'Brand Awards 2025',meta:'РЕПОРТАЖ · ПРЕМИЯ',path:'/brand-awards-2025',cover:'https://i.wfolio.ru/x/2liGxMhJRjilwq8i78-UqZczLd56D3TA/sTnJtdZp03LsDDiOBzLXI-I2h26Bzrzc/TMWRSPwdrKgzW3k4WFS2D6CmUDB3KnLU/cEPYOfKIUqVsnZ6pKpV2--_WhDnMkV8b/VGQ11YwQFowByhCoSgY4lg.jpg'},
-  {cat:'Ивенты',title:'Bosco Golf Cup',meta:'РЕПОРТАЖ · BOSCO',path:'/bosco-golf-cup',cover:'https://i.wfolio.ru/x/2liGxMhJRjilwq8i78-UqZczLd56D3TA/sTnJtdZp03LsDDiOBzLXI-I2h26Bzrzc/TMWRSPwdrKgzW3k4WFS2D7_Ak3vEczqf/XD_ljRuFvSLs7FiA_tcegQdKa46EBFPh/RoykuF0nOFiO_SrQFTcs1g.jpg'},
-  {cat:'Ивенты',title:'Лица Event АКМР',meta:'РЕПОРТАЖ · АКМР 2025',path:'/litsa-event-akmr-2025',cover:'https://i.wfolio.ru/x/2liGxMhJRjilwq8i78-UqZczLd56D3TA/sTnJtdZp03LsDDiOBzLXI-I2h26Bzrzc/TMWRSPwdrKgzW3k4WFS2D9QK2WewdAfZ/uVIhuEFHW5B6ZTOwVpGvrdWW9LifyZGU/U4wgO-4LYPFH_BwvtDgS7A.jpg'},
-  {cat:'Fashion',title:'Lardini',meta:'FASHION · БРЕНД',path:'/lardini',cover:'https://i.wfolio.ru/x/2liGxMhJRjilwq8i78-UqZczLd56D3TA/sTnJtdZp03LsDDiOBzLXI-I2h26Bzrzc/TMWRSPwdrKgzW3k4WFS2DyL7_ZOjIWEg/WIoSNCB4cRSXZjeyzOw0m5axL7cerpnb/MLUb_hyE7mNq--cAXG6I7A.jpg'},
-  {cat:'Fashion',title:'Sublime',meta:'EDITORIAL',path:'/sublime',cover:'https://i.wfolio.ru/x/2liGxMhJRjilwq8i78-UqZczLd56D3TA/sTnJtdZp03LsDDiOBzLXI-I2h26Bzrzc/TMWRSPwdrKgzW3k4WFS2D2eTVtXmY8jc/AidrPIaxNFhVgxcAfPcViZhi3jG7GJ2b.jpeg'},
-  {cat:'Fashion',title:'Bosco Ceremony',meta:'COMMERCIAL · BOSCO',path:'/bosco-ceremony-1',cover:'https://i.wfolio.ru/x/2liGxMhJRjilwq8i78-UqZczLd56D3TA/sTnJtdZp03LsDDiOBzLXI-I2h26Bzrzc/TMWRSPwdrKgzW3k4WFS2D7dHlJJ5kkxl/qGFsDa1roIYuCuH8P9ldQJzcZXS4ia9o/yd6MZ_3LiR8_GTuzGUpRaA.jpg'}
+  {cat:'Свадьбы',title:'Bosco Ceremony',meta:'СВАДЬБА · BOSCO',path:'/bosco-ceremony',cover:B+'ejbuBzNo7OC8/WT9xv9Cx7go7zO4eVEPOOP2xvftiXtf5/2M5n7RoLhbvcLjcFVYscIA.jpg'},
+  {cat:'Свадьбы',title:'Даниил & Евгения',meta:'СВАДЬБА · МОСКВА',path:'/daniil-evgeniya',cover:B+'ekosxx6bR5mI/BQUpM4rS5bTseMypshiZ2vtJT3wx3DHB/Z38fEhXFb61Qt9rDEygQyQ.jpg'},
+  {cat:'Свадьбы',title:'Dmitry & Daria',meta:'СВАДЬБА',path:'/dmitry-and-daria-s',cover:B+'en6TzjfubjTI/m5MKxy7A5R46QHEDWs776dg6v_4LU8xQ/YoarRn5xTZTzWVlsLEdfvQ.jpg'},
+  {cat:'Ивенты',title:'Brand Awards 2025',meta:'РЕПОРТАЖ · ПРЕМИЯ',path:'/brand-awards-2025',cover:B+'er9C7VfLM1US/2dcdWGyHykDP8dClUXEGowAqeCqSAwmI/aODNDcC-2jJQDgSg3xvcUQ.jpg'},
+  {cat:'Ивенты',title:'Bosco Golf Cup',meta:'РЕПОРТАЖ · BOSCO',path:'/bosco-golf-cup',cover:B+'eo5OMZYmfWR5/mQE5fjgtgVbxQPYFm3fYqA4IaHSkYEWj/Yh_UyjX-DD-80wFmNE0-0w.jpg'},
+  {cat:'Ивенты',title:'Лица Event АКМР',meta:'РЕПОРТАЖ · АКМР 2025',path:'/litsa-event-akmr-2025',cover:B+'eoij8k08KNxv/CKENhEzyO62TZ13SEX2x_I-k1HBEPspM/G6SF4s--z9So3nM0oY8qxQ.jpg'},
+  {cat:'Fashion',title:'Million Dollars',meta:'EDITORIAL',path:'/million-dollars',cover:B+'euHF_lBxb9tv/b94TYqBl9x6WM8YNGIUsxMU_0MJ3-Sfo/Z6AXXhhRCtHyBeRXFcBXMQ.jpg'},
+  {cat:'Fashion',title:'Яна Пашкова',meta:'FASHION · МОДЕЛЬ',path:'/yana-pashkova',cover:B+'etvDIkuLsu9z/qH3jyrsoDVexJRYYbwUqCf5TGxAwCJ-8/ZEteHfIm3Xt_DGaMBLTBZQ.jpg'},
+  {cat:'Fashion',title:'Karina',meta:'FASHION · МОДЕЛЬ',path:'/karina',cover:B+'ellgJyU-kb68/0CrkAUJHnfX3lwG8I9tXQo7O5qLfSbWz/cDbly8Rm63sdKM2LPnobgQ.jpg'}
 ];
 const urlFor = s => 'https://korushev.media'+s.path;
 
