@@ -138,7 +138,8 @@
   @keyframes shutter{0%{box-shadow:0 0 0 0 rgba(217,138,75,.7)}50%{box-shadow:0 0 0 10px rgba(217,138,75,0)}100%{box-shadow:0 0 0 0 rgba(217,138,75,0)}}
 
   /* trust */
-  .stats{display:flex;flex-wrap:wrap;justify-content:center;gap:30px 44px;text-align:center;margin:14px 0 44px}
+  .stats{display:flex;flex-wrap:wrap;justify-content:center;gap:30px 44px;text-align:center;margin:14px 0 44px;opacity:0;transform:translateY(18px);transition:opacity .8s ease,transform .8s cubic-bezier(.16,1,.3,1)}
+  .stats.revealed{opacity:1;transform:none}
   .stat{flex:0 0 auto;min-width:110px}
   .stat .n{font-family:var(--serif);font-size:clamp(1.8rem,6vw,3.5rem);color:var(--gold-hi);font-variant-numeric:tabular-nums;line-height:1;white-space:nowrap}
   .stat .l{font-family:var(--mono);font-size:.6rem;letter-spacing:.16em;color:var(--muted);margin-top:8px}
@@ -313,11 +314,11 @@
     <div class="shead"><div><div class="idx">02 — Почему спокойно</div><h2 class="serif">Не фотограф на день —<br>режиссёр события</h2>
       <p class="mono" style="max-width:38ch;line-height:2;margin-top:16px">Свадьбы · корпоративы банков · fashion-показы · рекламные кампании · Bosco · госпротокол · форумы</p></div></div>
     <div class="stats">
-      <div class="stat"><div class="n" data-to="16">0</div><div class="l">лет за камерой</div></div>
-      <div class="stat"><div class="n" data-to="6000000">0</div><div class="l">кадров снято</div></div>
-      <div class="stat"><div class="n" data-to="3000" data-suf="+">0</div><div class="l">съёмок и мероприятий</div></div>
-      <div class="stat"><div class="n" data-to="500000" data-suf="+">0</div><div class="l">человек в кадре</div></div>
-      <div class="stat"><div class="n" data-to="11000" data-suf="+">0</div><div class="l">специалистов по миру</div></div>
+      <div class="stat"><div class="n">16</div><div class="l">лет за камерой</div></div>
+      <div class="stat"><div class="n">6 000 000</div><div class="l">кадров снято</div></div>
+      <div class="stat"><div class="n">3 000+</div><div class="l">съёмок и мероприятий</div></div>
+      <div class="stat"><div class="n">500 000+</div><div class="l">человек в кадре</div></div>
+      <div class="stat"><div class="n">11 000+</div><div class="l">специалистов по миру</div></div>
     </div>
   </div>
   <div class="marquee"><div class="track" id="mq"></div></div>
@@ -375,7 +376,7 @@
 
 <script>
 /* failsafe: занавес поднимается всегда, даже при ошибке */
-addEventListener('load',()=>setTimeout(()=>document.body.classList.add('loaded'),1800));
+addEventListener('load',()=>setTimeout(()=>{document.body.classList.add('loaded');document.querySelector('.stats')&&document.querySelector('.stats').classList.add('revealed')},1800));
 const RM = matchMedia('(prefers-reduced-motion:reduce)').matches;
 const CATS = ['Все','Свадьбы','Ивенты','Fashion'];
 const WASH = {
@@ -501,19 +502,9 @@ addEventListener('keydown',e=>{if(e.key==='Escape')closeContact()});
 const mq=document.getElementById('mq');const proof=['ШЕФ-ФОТОГРАФ FASHIONTV','BOSCO','КОРПОРАТИВЫ БАНКОВ','FASHION-ПОКАЗЫ','РЕКЛАМНЫЕ КАМПАНИИ','ТАСС','РИА','MOS.RU','АЭРОСЪЁМКА · ДРОН','ПРОТОКОЛ · ГОС','БАЗА 11 000+ СПЕЦИАЛИСТОВ'];
 mq.innerHTML=[...proof,...proof].map(p=>`<b>${p} &nbsp;·</b>`).join('');
 
-/* count-up (плавно через requestAnimationFrame + ease-out) */
-function countUp(n){
-  const to=+n.dataset.to, suf=n.dataset.suf||'';
-  const fmt=x=>Math.round(x).toLocaleString('ru-RU');
-  if(RM){n.textContent=fmt(to)+suf;return}
-  const dur=1400, t0=performance.now(), ease=t=>1-Math.pow(1-t,3);
-  (function frame(now){
-    const p=Math.min(1,(now-t0)/dur);
-    n.textContent=fmt(to*ease(p))+suf;
-    if(p<1)requestAnimationFrame(frame);
-  })(t0);
-}
-new IntersectionObserver((es,o)=>es.forEach(e=>{if(e.isIntersecting){e.target.querySelectorAll('.n').forEach(countUp);o.unobserve(e.target)}}),{threshold:.4}).observe(document.querySelector('.stats'));
+/* цифры: чистое проявление, без счётчика (7-значное число дёргало ширину строки → глюк) */
+(function(){const s=document.querySelector('.stats');if(!s)return;
+  new IntersectionObserver((es,o)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('revealed');o.unobserve(e.target)}}),{threshold:.3}).observe(s);})();
 
 /* clock МСК */
 function clock(){try{document.getElementById('clock').textContent=new Date().toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit',timeZone:'Europe/Moscow'})+' МСК'}catch(e){}}
