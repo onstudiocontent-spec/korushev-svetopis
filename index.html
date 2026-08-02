@@ -602,6 +602,10 @@ function renderTheme(t){
         <button class="btn" style="max-width:230px" onclick="shareTheme('${t.key}','${t.nm}')">Поделиться разделом</button>
         <a class="cta" href="#" onclick="openContact('Здравствуйте! Интересует ${t.nm.toLowerCase()}.');return false" style="font-size:.72rem">Обсудить съёмку</a>
       </div>
+      <div style="text-align:center;margin-top:52px;padding-top:30px;border-top:1px solid var(--hair)">
+        <div class="mono" style="margin-bottom:14px">Смотреть остальное</div>
+        <button class="btn" onclick="showHome()" style="max-width:320px;margin:0 auto">← Все направления · главная korushev.media</button>
+      </div>
     </div></section>`;
   const tg=el.querySelector('#tgrid');
   if(shoots.length){shoots.forEach((s,i)=>{const c=makeCard(s,i);c.classList.add('in');tg.appendChild(c)})}
