@@ -480,11 +480,19 @@ addEventListener('keydown',e=>{if(e.key==='Escape')closeContact()});
 const mq=document.getElementById('mq');const proof=['ШЕФ-ФОТОГРАФ FASHIONTV','BOSCO','КОРПОРАТИВЫ БАНКОВ','FASHION-ПОКАЗЫ','РЕКЛАМНЫЕ КАМПАНИИ','ТАСС','РИА','MOS.RU','АЭРОСЪЁМКА · ДРОН','ПРОТОКОЛ · ГОС','БАЗА 11 000+ СПЕЦИАЛИСТОВ'];
 mq.innerHTML=[...proof,...proof].map(p=>`<b>${p} &nbsp;·</b>`).join('');
 
-/* count-up */
-new IntersectionObserver((es,o)=>es.forEach(e=>{if(e.isIntersecting){e.target.querySelectorAll('.n').forEach(n=>{
-  const to=+n.dataset.to,suf=n.dataset.suf||'';let v=0;const step=to/(RM?1:48);
-  const fmt=x=>Math.round(x).toLocaleString('ru-RU').replace(/ /g,' ');
-  const t=setInterval(()=>{v+=step;if(v>=to){v=to;clearInterval(t)}n.textContent=fmt(v)+suf},20)});o.unobserve(e.target)}}),{threshold:.4}).observe(document.querySelector('.stats'));
+/* count-up (плавно через requestAnimationFrame + ease-out) */
+function countUp(n){
+  const to=+n.dataset.to, suf=n.dataset.suf||'';
+  const fmt=x=>Math.round(x).toLocaleString('ru-RU');
+  if(RM){n.textContent=fmt(to)+suf;return}
+  const dur=1400, t0=performance.now(), ease=t=>1-Math.pow(1-t,3);
+  (function frame(now){
+    const p=Math.min(1,(now-t0)/dur);
+    n.textContent=fmt(to*ease(p))+suf;
+    if(p<1)requestAnimationFrame(frame);
+  })(t0);
+}
+new IntersectionObserver((es,o)=>es.forEach(e=>{if(e.isIntersecting){e.target.querySelectorAll('.n').forEach(countUp);o.unobserve(e.target)}}),{threshold:.4}).observe(document.querySelector('.stats'));
 
 /* clock МСК */
 function clock(){try{document.getElementById('clock').textContent=new Date().toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit',timeZone:'Europe/Moscow'})+' МСК'}catch(e){}}
