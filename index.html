@@ -34,9 +34,8 @@
   .gold{color:var(--gold)}
 
   /* film grain + vignette atmosphere */
-  #grain{position:fixed;inset:0;z-index:60;pointer-events:none;opacity:.05;mix-blend-mode:overlay;
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    animation:grain 6s steps(6) infinite}
+  #grain{position:fixed;inset:0;z-index:60;pointer-events:none;opacity:.035;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
   #vig{position:fixed;inset:0;z-index:59;pointer-events:none;
     background:radial-gradient(120% 80% at 50% 40%,transparent 55%,rgba(0,0,0,.55) 100%)}
   @keyframes grain{0%{transform:translate(0,0)}20%{transform:translate(-4%,3%)}40%{transform:translate(3%,-4%)}60%{transform:translate(-3%,2%)}80%{transform:translate(4%,-2%)}100%{transform:translate(0,0)}}
@@ -53,7 +52,7 @@
 
   /* header */
   header{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;justify-content:space-between;align-items:center;
-    padding:16px 20px;mix-blend-mode:difference}
+    padding:14px 20px;background:linear-gradient(180deg,rgba(11,11,13,.85),transparent);color:var(--ivory)}
   header .logo{font-family:var(--mono);letter-spacing:.35em;font-size:.72rem}
 
   /* HERO */
@@ -114,9 +113,9 @@
   @media(min-width:980px){.grid{grid-template-columns:repeat(3,1fr)}}
 
   .card{position:relative;border-radius:4px;overflow:hidden;background:var(--surface);border:1px solid var(--hair);
-    opacity:0;transform:translateY(26px) scale(.97);filter:blur(6px);transition:opacity .7s,transform .7s,filter .7s;
+    opacity:0;transform:translateY(24px) scale(.98);transition:opacity .6s ease,transform .6s cubic-bezier(.16,1,.3,1);
     will-change:transform,opacity}
-  .card.in{opacity:1;transform:none;filter:none}
+  .card.in{opacity:1;transform:none}
   .card .cover{position:relative;aspect-ratio:4/5;overflow:hidden}
   .card .cover .art{position:absolute;inset:0;transition:transform .9s cubic-bezier(.16,1,.3,1)}
   .card:hover .cover .art{transform:scale(1.05)}
@@ -177,7 +176,7 @@
 
   /* card cover depth */
   .card .cover .bigcat{position:absolute;right:-4%;top:6%;z-index:1;font-family:var(--serif);font-size:clamp(3.4rem,12vw,5.2rem);line-height:.8;color:rgba(236,231,221,.06);letter-spacing:-.02em;text-transform:uppercase;pointer-events:none;transform:rotate(-4deg)}
-  .card .cover .grainc{position:absolute;inset:0;z-index:1;opacity:.35;mix-blend-mode:overlay;pointer-events:none;
+  .card .cover .grainc{position:absolute;inset:0;z-index:1;opacity:.12;pointer-events:none;
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='90' height='90'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
   /* USP скорость */
   .usp{background:var(--deep);border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);padding:22px 0;position:relative;z-index:3}
@@ -196,8 +195,7 @@
   .cta{position:relative;overflow:hidden}
   .cta::after{content:"";position:absolute;top:0;left:0;width:45%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.4),transparent);transform:translateX(-180%) skewX(-20deg);animation:shine 3.6s infinite;pointer-events:none}
   @keyframes shine{0%{transform:translateX(-180%) skewX(-20deg)}55%,100%{transform:translateX(340%) skewX(-20deg)}}
-  .stat .n{animation:statglow 3.2s ease-in-out infinite}
-  @keyframes statglow{0%,100%{text-shadow:0 0 0 transparent}50%{text-shadow:0 0 22px rgba(227,192,121,.45)}}
+  /* (свечение цифр убрано — давало репейнт при скролле) */
   /* выбор канала связи */
   #contact{position:fixed;inset:0;z-index:90;background:rgba(5,5,6,.78);backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;padding:20px}
   #contact.open{display:flex;animation:fade .3s}
@@ -397,7 +395,10 @@ const SHOOTS = [
   {cat:'Ивенты',title:'Лица Event АКМР',meta:'РЕПОРТАЖ · АКМР 2025',path:'/litsa-event-akmr-2025',cover:B+'eoij8k08KNxv/CKENhEzyO62TZ13SEX2x_I-k1HBEPspM/G6SF4s--z9So3nM0oY8qxQ.jpg'},
   {cat:'Fashion',title:'Million Dollars',meta:'EDITORIAL',path:'/million-dollars',cover:B+'euHF_lBxb9tv/b94TYqBl9x6WM8YNGIUsxMU_0MJ3-Sfo/Z6AXXhhRCtHyBeRXFcBXMQ.jpg'},
   {cat:'Fashion',title:'Яна Пашкова',meta:'FASHION · МОДЕЛЬ',path:'/yana-pashkova',cover:B+'etvDIkuLsu9z/qH3jyrsoDVexJRYYbwUqCf5TGxAwCJ-8/ZEteHfIm3Xt_DGaMBLTBZQ.jpg'},
-  {cat:'Fashion',title:'Karina',meta:'FASHION · МОДЕЛЬ',path:'/karina',cover:B+'ellgJyU-kb68/0CrkAUJHnfX3lwG8I9tXQo7O5qLfSbWz/cDbly8Rm63sdKM2LPnobgQ.jpg'}
+  {cat:'Fashion',title:'Karina',meta:'FASHION · МОДЕЛЬ',path:'/karina',cover:B+'ellgJyU-kb68/0CrkAUJHnfX3lwG8I9tXQo7O5qLfSbWz/cDbly8Rm63sdKM2LPnobgQ.jpg'},
+  {cat:'Fashion',title:'Анна Павлова · Краса России',meta:'FASHION · BEAUTY',path:'/anna-pavlova-krasa-rossii',cover:B+'ei8JsX14ExSY/PlQqPCqRxQSnGE0e8aWkaeykMXzc_ntY/9Br21s77m7Zyiv9Bmo-5hw.jpg'},
+  {cat:'Fashion',title:'Светлана',meta:'FASHION · МОДЕЛЬ',path:'/svetlana',cover:B+'evtNOXGloH5E/ULTDk3nf0QCQkmMcZE6GIXfGlGtZFzeP/LrkI0Jo4qu3LFtVKjKxQhA.jpg'},
+  {cat:'Fashion',title:'Anna',meta:'FASHION · МОДЕЛЬ',path:'/anna',cover:B+'el4g4c_DHgHo/Xv5q20QC1dLYIOrZEnkWthRu6eV6nUdj/tA9aa43TepfRNIR5hHlYmg.jpg'}
 ];
 const urlFor = s => 'https://korushev.media'+s.path;
 
