@@ -367,7 +367,7 @@
     <div class="ctitle mono">Как удобнее связаться?</div>
     <a class="copt" id="c-tg" href="#" target="_blank" rel="noopener"><span class="cico"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M21.9 4.3 2.6 11.8c-1.1.4-1.1 1.5-.2 1.8l4.9 1.5 1.9 5.9c.2.6.4.8 1 .8.4 0 .7-.2 1-.5l2.6-2.5 5 3.7c.9.5 1.6.2 1.8-.9L24 5.6c.3-1.3-.5-1.9-1.4-1.5Z"/></svg></span>Telegram</a>
     <a class="copt" id="c-max" href="#" target="_blank" rel="noopener"><span class="cico">M</span>MAX</a>
-    <a class="copt" id="c-viz" href="#" target="_blank" rel="noopener"><span class="cico"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 10h5M7 14h8"/></svg></span>Визитка</a>
+    <button class="copt" style="font:inherit;cursor:pointer;width:100%;text-align:left;background:none" onclick="saveContact()"><span class="cico"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg></span>Сохранить контакт в телефон</button>
     <button class="cclose" onclick="closeContact()">закрыть</button>
   </div>
 </div>
@@ -491,12 +491,24 @@ function openContact(prefill){
   const t=prefill?('?text='+encodeURIComponent(prefill)):'';
   document.getElementById('c-tg').href='https://t.me/oleg_creat'+t;
   document.getElementById('c-max').href=MAX_URL;
-  document.getElementById('c-viz').href=VIZ_URL;
   document.getElementById('contact').classList.add('open');
 }
 function closeContact(){document.getElementById('contact').classList.remove('open')}
 document.getElementById('contact').addEventListener('click',e=>{if(e.target.id==='contact')closeContact()});
-addEventListener('keydown',e=>{if(e.key==='Escape')closeContact()});
+addEventListener('keydown',e=>{if(e.key==='Escape'){closeContact();closeMenu&&closeMenu()}});
+/* визитка → сохранить контакт в телефон (vCard) */
+function saveContact(){
+  const v=['BEGIN:VCARD','VERSION:3.0','N:Корушев;Олег;;;','FN:Олег Корушев','ORG:korushev.media','TITLE:Фотограф · Видеограф','TEL;TYPE=CELL:+79637775945','URL:https://korushev.media','X-SOCIALPROFILE;TYPE=telegram:https://t.me/oleg_creat','NOTE:Съёмки: свадьбы, репортаж, fashion, бренд-контент','END:VCARD'].join('\r\n');
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([v],{type:'text/vcard'}));a.download='Oleg_Korushev.vcf';document.body.appendChild(a);a.click();a.remove();
+  toast('Контакт сохранён — добавьте в телефон');closeContact();
+}
+/* поделиться разделом одной ссылкой */
+function shareTheme(k,nm){
+  const url=location.origin+location.pathname+'#'+k;
+  const data={title:'Олег Корушев — '+nm,text:'Смотрите мои работы: '+nm,url};
+  if(navigator.share){navigator.share(data).catch(()=>{})}
+  else{navigator.clipboard.writeText(url).catch(()=>{});toast('Ссылка на раздел скопирована')}
+}
 
 /* marquee */
 const mq=document.getElementById('mq');const proof=['ШЕФ-ФОТОГРАФ FASHIONTV','BOSCO','КОРПОРАТИВЫ БАНКОВ','FASHION-ПОКАЗЫ','РЕКЛАМНЫЕ КАМПАНИИ','ТАСС','РИА','MOS.RU','АЭРОСЪЁМКА · ДРОН','ПРОТОКОЛ · ГОС','БАЗА 11 000+ СПЕЦИАЛИСТОВ'];
@@ -525,9 +537,11 @@ const THEMES=[
 ];
 function openMenu(){document.getElementById('menu').classList.add('open')}
 function closeMenu(){document.getElementById('menu').classList.remove('open')}
-function showHome(){document.getElementById('theme').classList.remove('open');document.body.style.overflow='';window.scrollTo(0,0)}
-function showTheme(k){
-  const t=THEMES.find(x=>x.key===k);if(!t)return;closeMenu();
+function showTheme(k){location.hash=k;}
+function closeTheme(){document.getElementById('theme').classList.remove('open');document.body.style.overflow='';window.scrollTo(0,0);}
+function showHome(){ if((location.hash||'').length>1){history.pushState('',document.title,location.pathname);} closeTheme(); }
+function renderTheme(t){
+  closeMenu();
   const shoots=SHOOTS.filter(s=>s.cat&&s.cat===t.cat);
   const el=document.getElementById('theme');
   el.innerHTML=`
@@ -541,6 +555,7 @@ function showTheme(k){
       <div class="grid" id="tgrid"></div>
       <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;align-items:center;margin-top:34px">
         <a class="btn primary" style="max-width:300px" href="https://korushev.media${t.path}" target="_blank" rel="noopener">Все работы раздела →</a>
+        <button class="btn" style="max-width:230px" onclick="shareTheme('${t.key}','${t.nm}')">Поделиться разделом</button>
         <a class="cta" href="#" onclick="openContact('Здравствуйте! Интересует ${t.nm.toLowerCase()}.');return false" style="font-size:.72rem">Обсудить съёмку</a>
       </div>
     </div></section>`;
@@ -549,15 +564,18 @@ function showTheme(k){
   else{tg.innerHTML='<div class="note" style="grid-column:1/-1">Все галереи раздела — по кнопке ниже (открываются на korushev.media).</div>'}
   el.classList.add('open');el.scrollTop=0;document.body.style.overflow='hidden';window.scrollTo(0,0);
 }
+function route(){const k=(location.hash||'').replace('#','');const t=THEMES.find(x=>x.key===k);if(t){renderTheme(t)}else{closeTheme();}}
+addEventListener('hashchange',route);
 (function buildMenu(){
   const box=document.getElementById('menu-rows');
   const mk=(html,fn)=>{const d=document.createElement('div');d.className='mrow';d.innerHTML=html;d.onclick=fn;box.appendChild(d)};
   mk('<span class="nm">Главная</span><small>домой</small>',()=>{showHome();closeMenu()});
   THEMES.forEach(t=>mk(`<span class="nm">${t.nm}</span><small>${t.sub}</small>`,()=>showTheme(t.key)));
-  mk('<span class="nm">Связаться</span><small>Telegram · визитка</small>',()=>{closeMenu();openContact()});
+  mk('<span class="nm">Связаться</span><small>Telegram · сохранить контакт</small>',()=>{closeMenu();openContact()});
 })();
 
 render();
+route();
 </script>
 
 </body>
