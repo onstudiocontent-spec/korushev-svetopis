@@ -208,6 +208,20 @@
   .copt:hover{border-color:var(--gold);background:rgba(201,162,75,.08);transform:translateX(3px)}
   .cico{width:36px;height:36px;border-radius:9px;background:var(--gold);color:var(--ink);display:flex;align-items:center;justify-content:center;flex:0 0 auto;font-weight:800}
   .cclose{margin-top:4px;background:transparent;border:none;color:var(--muted);cursor:pointer;padding:8px;font-family:var(--mono);letter-spacing:.1em;text-transform:uppercase;font-size:.62rem}
+  /* премиум-визитка в разделах */
+  .vcard{margin-top:54px;border:1px solid var(--hair);border-radius:14px;overflow:hidden;
+    background:linear-gradient(160deg,rgba(201,162,75,.10),transparent 45%),var(--surface)}
+  .vcard-in{display:flex;gap:22px;align-items:center;padding:26px 24px;flex-wrap:wrap}
+  .vcard .ava{width:76px;height:76px;border-radius:50%;flex:0 0 auto;display:flex;align-items:center;justify-content:center;
+    font-family:var(--serif);font-size:1.9rem;color:var(--ink);background:linear-gradient(145deg,var(--gold-hi),var(--gold));box-shadow:0 8px 28px rgba(201,162,75,.25)}
+  .vcard .who{flex:1 1 220px;min-width:0}
+  .vcard .who .nm{font-family:var(--serif);font-size:1.5rem;line-height:1.1}
+  .vcard .who .rl{font-family:var(--mono);font-size:.62rem;letter-spacing:.16em;color:var(--gold-hi);text-transform:uppercase;margin-top:7px}
+  .vcard .who .ds{color:var(--muted);font-size:.92rem;margin-top:9px;line-height:1.5}
+  .vcard .vacts{display:flex;gap:10px;flex:1 1 260px;flex-wrap:wrap}
+  .vcard .vacts .btn{flex:1 1 130px}
+  .vcard .strip{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;padding:12px 20px;border-top:1px solid var(--hair);
+    font-family:var(--mono);font-size:.58rem;letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
   /* premium lightbox + ken-burns оживление */
   .card .cover{cursor:pointer}
   .grid .card .cover .art{transition:transform 5s ease}
@@ -602,7 +616,26 @@ function renderTheme(t){
         <button class="btn" style="max-width:230px" onclick="shareTheme('${t.key}','${t.nm}')">Поделиться разделом</button>
         <a class="cta" href="#" onclick="openContact('Здравствуйте! Интересует ${t.nm.toLowerCase()}.');return false" style="font-size:.72rem">Обсудить съёмку</a>
       </div>
-      <div style="text-align:center;margin-top:52px;padding-top:30px;border-top:1px solid var(--hair)">
+      <div class="vcard">
+        <div class="vcard-in">
+          <div class="ava">ОК</div>
+          <div class="who">
+            <div class="nm serif">Олег Корушев</div>
+            <div class="rl">Фотограф · Видеограф · Продюсер</div>
+            <div class="ds">16 лет за камерой. Снимаю то, что нельзя переснять — и отдаю галерею в тот же день.</div>
+          </div>
+          <div class="vacts">
+            <button class="btn primary" onclick="saveContact()">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg>Сохранить контакт</button>
+            <button class="btn" onclick="openContact('Здравствуйте! Интересует ${t.nm.toLowerCase()}.')">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.4 8.4 0 0 1-8.5 8.4 8.5 8.5 0 0 1-3.9-.9L3 20l1-5a8.4 8.4 0 0 1-1-4 8.5 8.5 0 0 1 17 0Z"/></svg>Написать</button>
+            <button class="btn" onclick="shareTheme('${t.key}','${t.nm}')">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7"/><path d="M12 3v13M7 8l5-5 5 5"/></svg>Отправить</button>
+          </div>
+        </div>
+        <div class="strip"><span>16 лет</span><span>·</span><span>6 000 000 кадров</span><span>·</span><span>3 000+ съёмок</span><span>·</span><span>FashionTV · ТАСС · РИА · Mos.ru</span></div>
+      </div>
+      <div style="text-align:center;margin-top:34px;padding-top:26px;border-top:1px solid var(--hair)">
         <div class="mono" style="margin-bottom:14px">Смотреть остальное</div>
         <button class="btn" onclick="showHome()" style="max-width:320px;margin:0 auto">← Все направления · главная korushev.media</button>
       </div>
