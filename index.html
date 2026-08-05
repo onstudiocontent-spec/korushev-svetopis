@@ -13,7 +13,7 @@
   :root{
     --ink:#0B0B0D; --surface:#141417; --deep:#050506;
     --ivory:#ECE7DD; --muted:#8A857B; --hair:rgba(236,231,221,.12);
-    --gold:#C9A24B; --gold-hi:#E3C079; --amber:#D98A4B;
+    --gold:#9FB2BA; --gold-hi:#D6DEE2; --amber:#7FA6B4;
     --serif:Georgia,'Times New Roman',serif;
     --sans:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
     --mono:ui-monospace,'SF Mono','JetBrains Mono',monospace;
@@ -59,8 +59,8 @@
   .hero{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:center;overflow:hidden}
   .hero .frame{position:absolute;inset:0;
     background:
-      radial-gradient(80% 60% at 30% 25%,rgba(201,162,75,.16),transparent 60%),
-      radial-gradient(70% 70% at 80% 80%,rgba(217,138,75,.12),transparent 60%),
+      radial-gradient(80% 60% at 30% 25%,rgba(159,178,186,.16),transparent 60%),
+      radial-gradient(70% 70% at 80% 80%,rgba(127,166,180,.12),transparent 60%),
       linear-gradient(180deg,#101013,#050506);}
   .hero .lb{position:absolute;left:0;right:0;height:9vh;background:var(--deep);z-index:2}
   .hero .lb.t{top:0}.hero .lb.b{bottom:0}
@@ -135,7 +135,7 @@
   .btn.primary:hover{background:var(--gold-hi)}
   .btn svg{width:14px;height:14px;flex:0 0 auto}
   .btn.flash{animation:shutter .5s}
-  @keyframes shutter{0%{box-shadow:0 0 0 0 rgba(217,138,75,.7)}50%{box-shadow:0 0 0 10px rgba(217,138,75,0)}100%{box-shadow:0 0 0 0 rgba(217,138,75,0)}}
+  @keyframes shutter{0%{box-shadow:0 0 0 0 rgba(127,166,180,.7)}50%{box-shadow:0 0 0 10px rgba(127,166,180,0)}100%{box-shadow:0 0 0 0 rgba(127,166,180,0)}}
 
   /* trust */
   .stats{display:flex;flex-wrap:wrap;justify-content:center;gap:30px 44px;text-align:center;margin:14px 0 44px;opacity:0;transform:translateY(18px);transition:opacity .8s ease,transform .8s cubic-bezier(.16,1,.3,1)}
@@ -151,7 +151,7 @@
 
   /* final */
   .final{text-align:center;background:
-    radial-gradient(60% 60% at 50% 30%,rgba(201,162,75,.12),transparent 65%),var(--deep)}
+    radial-gradient(60% 60% at 50% 30%,rgba(159,178,186,.12),transparent 65%),var(--deep)}
   .final h2{font-family:var(--serif);font-size:clamp(2.2rem,7vw,4.6rem);line-height:1.02;letter-spacing:-.01em;max-width:16ch;margin:0 auto}
   .final p{color:var(--muted);max-width:44ch;margin:20px auto 34px}
   .cta{display:inline-flex;align-items:center;gap:12px;font-family:var(--mono);letter-spacing:.14em;text-transform:uppercase;
@@ -192,7 +192,7 @@
   @keyframes blink{0%,49%{opacity:1}50%,100%{opacity:.12}}
   .sticky-tg{overflow:visible}
   .sticky-tg::before{content:"";position:absolute;inset:0;border-radius:100px;animation:ring 2.2s infinite;pointer-events:none}
-  @keyframes ring{0%{box-shadow:0 0 0 0 rgba(201,162,75,.5)}70%{box-shadow:0 0 0 16px rgba(201,162,75,0)}100%{box-shadow:0 0 0 0 rgba(201,162,75,0)}}
+  @keyframes ring{0%{box-shadow:0 0 0 0 rgba(159,178,186,.5)}70%{box-shadow:0 0 0 16px rgba(159,178,186,0)}100%{box-shadow:0 0 0 0 rgba(159,178,186,0)}}
   .cta{position:relative;overflow:hidden}
   .cta::after{content:"";position:absolute;top:0;left:0;width:45%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.4),transparent);transform:translateX(-180%) skewX(-20deg);animation:shine 3.6s infinite;pointer-events:none}
   @keyframes shine{0%{transform:translateX(-180%) skewX(-20deg)}55%,100%{transform:translateX(340%) skewX(-20deg)}}
@@ -205,15 +205,15 @@
   @keyframes pop{from{transform:translateY(22px) scale(.96);opacity:0}to{transform:none;opacity:1}}
   .ctitle{margin-bottom:6px;text-align:center;color:var(--muted)}
   .copt{display:flex;align-items:center;gap:14px;padding:13px 15px;border:1px solid var(--hair);border-radius:6px;color:var(--ivory);font-family:var(--sans);font-size:.98rem;transition:.2s}
-  .copt:hover{border-color:var(--gold);background:rgba(201,162,75,.08);transform:translateX(3px)}
+  .copt:hover{border-color:var(--gold);background:rgba(159,178,186,.08);transform:translateX(3px)}
   .cico{width:36px;height:36px;border-radius:9px;background:var(--gold);color:var(--ink);display:flex;align-items:center;justify-content:center;flex:0 0 auto;font-weight:800}
   .cclose{margin-top:4px;background:transparent;border:none;color:var(--muted);cursor:pointer;padding:8px;font-family:var(--mono);letter-spacing:.1em;text-transform:uppercase;font-size:.62rem}
   /* премиум-визитка в разделах */
   .vcard{margin-top:54px;border:1px solid var(--hair);border-radius:14px;overflow:hidden;
-    background:linear-gradient(160deg,rgba(201,162,75,.10),transparent 45%),var(--surface)}
+    background:linear-gradient(160deg,rgba(159,178,186,.10),transparent 45%),var(--surface)}
   .vcard-in{display:flex;gap:22px;align-items:center;padding:26px 24px;flex-wrap:wrap}
   .vcard .ava{width:76px;height:76px;border-radius:50%;flex:0 0 auto;display:flex;align-items:center;justify-content:center;
-    font-family:var(--serif);font-size:1.9rem;color:var(--ink);background:linear-gradient(145deg,var(--gold-hi),var(--gold));box-shadow:0 8px 28px rgba(201,162,75,.25)}
+    font-family:var(--serif);font-size:1.9rem;color:var(--ink);background:linear-gradient(145deg,var(--gold-hi),var(--gold));box-shadow:0 8px 28px rgba(159,178,186,.25)}
   .vcard .who{flex:1 1 220px;min-width:0}
   .vcard .who .nm{font-family:var(--serif);font-size:1.5rem;line-height:1.1}
   .vcard .who .rl{font-family:var(--mono);font-size:.62rem;letter-spacing:.16em;color:var(--gold-hi);text-transform:uppercase;margin-top:7px}
@@ -247,7 +247,7 @@
   .pain .q{font-family:var(--serif);font-style:italic;color:var(--gold-hi);font-size:clamp(1.1rem,2.6vw,1.35rem);margin-bottom:12px;line-height:1.25}
   .pain .a{color:var(--ivory);opacity:.82;font-size:1rem;line-height:1.55}
   /* личное обращение */
-  .personal{background:radial-gradient(70% 100% at 50% 0%,rgba(201,162,75,.09),transparent),var(--deep);border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);text-align:center;padding:clamp(50px,9vh,92px) 0;position:relative;z-index:3}
+  .personal{background:radial-gradient(70% 100% at 50% 0%,rgba(159,178,186,.09),transparent),var(--deep);border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);text-align:center;padding:clamp(50px,9vh,92px) 0;position:relative;z-index:3}
   .personal .pmark{color:var(--gold);letter-spacing:.22em;margin-bottom:16px}
   .personal p{font-family:var(--serif);font-size:clamp(1.35rem,3.6vw,2.15rem);line-height:1.35;max-width:24ch;margin:0 auto 26px;text-wrap:balance}
   /* меню + тема-страницы */
@@ -265,7 +265,7 @@
   #menu .mclose{position:absolute;top:22px;right:22px;font-family:var(--mono);font-size:.66rem;letter-spacing:.12em;color:var(--muted);background:none;border:none;cursor:pointer;text-transform:uppercase}
   #theme{position:fixed;inset:0;z-index:70;background:var(--ink);overflow-y:auto;display:none}
   #theme.open{display:block}
-  .thero{min-height:56vh;display:flex;flex-direction:column;justify-content:center;padding:96px 0 44px;background:radial-gradient(80% 60% at 30% 25%,rgba(201,162,75,.14),transparent 60%),linear-gradient(180deg,#101013,#0b0b0d)}
+  .thero{min-height:56vh;display:flex;flex-direction:column;justify-content:center;padding:96px 0 44px;background:radial-gradient(80% 60% at 30% 25%,rgba(159,178,186,.14),transparent 60%),linear-gradient(180deg,#101013,#0b0b0d)}
   .thero h1{font-family:var(--serif);font-size:clamp(2.6rem,10vw,5.4rem);line-height:.98;margin:.12em 0;letter-spacing:-.01em}
   .backhome{position:fixed;top:14px;left:14px;z-index:73;font-family:var(--mono);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ivory);background:rgba(20,20,23,.82);border:1px solid var(--hair);border-radius:100px;padding:11px 17px;cursor:pointer;display:flex;gap:8px;align-items:center;backdrop-filter:blur(6px)}
   .backhome:hover{border-color:var(--gold);color:var(--gold)}
@@ -425,11 +425,11 @@ addEventListener('load',()=>setTimeout(()=>{document.body.classList.add('loaded'
 const RM = matchMedia('(prefers-reduced-motion:reduce)').matches;
 const CATS = ['Все','Свадьбы','Ивенты','Fashion'];
 const WASH = {
-  'Свадьбы':'radial-gradient(95% 75% at 28% 18%,rgba(217,138,75,.55),transparent 55%),radial-gradient(60% 50% at 82% 92%,rgba(201,162,75,.28),transparent 60%),linear-gradient(155deg,#3a2417,#170d08 60%,#0b0b0d)',
-  'Ивенты':'radial-gradient(95% 75% at 72% 18%,rgba(201,162,75,.52),transparent 55%),radial-gradient(55% 50% at 18% 92%,rgba(217,138,75,.22),transparent 60%),linear-gradient(155deg,#2f2712,#161206 60%,#0b0b0d)',
+  'Свадьбы':'radial-gradient(95% 75% at 28% 18%,rgba(127,166,180,.55),transparent 55%),radial-gradient(60% 50% at 82% 92%,rgba(159,178,186,.28),transparent 60%),linear-gradient(155deg,#26313a,#10161b 60%,#0b0b0d)',
+  'Ивенты':'radial-gradient(95% 75% at 72% 18%,rgba(159,178,186,.52),transparent 55%),radial-gradient(55% 50% at 18% 92%,rgba(127,166,180,.22),transparent 60%),linear-gradient(155deg,#232e35,#0f1418 60%,#0b0b0d)',
   'Fashion':'radial-gradient(85% 65% at 50% 22%,rgba(190,190,205,.42),transparent 55%),radial-gradient(55% 50% at 85% 88%,rgba(120,120,140,.28),transparent 60%),linear-gradient(155deg,#26262f,#131318 60%,#0b0b0d)',
-  'Гос':'radial-gradient(95% 75% at 34% 20%,rgba(150,175,150,.4),transparent 55%),radial-gradient(50% 50% at 82% 90%,rgba(201,162,75,.14),transparent 60%),linear-gradient(155deg,#19221e,#0f1513 60%,#0b0b0d)',
-  'Индустрия':'radial-gradient(95% 75% at 62% 20%,rgba(90,135,175,.5),transparent 55%),radial-gradient(50% 50% at 18% 92%,rgba(201,162,75,.16),transparent 60%),linear-gradient(155deg,#141e29,#0e151c 60%,#0b0b0d)'
+  'Гос':'radial-gradient(95% 75% at 34% 20%,rgba(150,175,150,.4),transparent 55%),radial-gradient(50% 50% at 82% 90%,rgba(159,178,186,.14),transparent 60%),linear-gradient(155deg,#19221e,#0f1513 60%,#0b0b0d)',
+  'Индустрия':'radial-gradient(95% 75% at 62% 20%,rgba(90,135,175,.5),transparent 55%),radial-gradient(50% 50% at 18% 92%,rgba(159,178,186,.16),transparent 60%),linear-gradient(155deg,#141e29,#0e151c 60%,#0b0b0d)'
 };
 const B='https://i.wfolio.ru/x/XEFEvE-Nu381pOR4oV5MYYkCKAb7WEFi/2HxtdBnmmBUxFRl-bxvEKe5TBld7KBhR/mZVnX2Wn7EJ4VVc-U1E0';
 const SHOOTS = [
